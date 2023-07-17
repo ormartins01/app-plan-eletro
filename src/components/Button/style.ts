@@ -4,8 +4,8 @@ import styled from "styled-components";
 export const ButtonStyle = styled.button`
     width: 95%;
     height: 39px;
-    background-color: #FF577F;
-    border: 1px solid #FF577F;
+    background-color: aqua;
+    border: 1px solid aqua;
     border-radius: 4px;
     color: #FFFFFF;
     font-size: 13px;
@@ -15,7 +15,7 @@ export const ButtonStyle = styled.button`
     font-weight: 500;
 
         :hover {
-        border: 1px solid #FF427F;
+        border: 1px solid aqua;
         background-color: #212529;
         color: #FFFFFF;
         cursor: pointer;

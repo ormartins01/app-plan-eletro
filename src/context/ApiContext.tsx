@@ -1,6 +1,5 @@
 // import { useEffect } from "react";
 import { createContext, ReactNode, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import {
   toastFail,
   toastFailTechRegister,
@@ -25,6 +24,14 @@ export interface IProducts {
   updated_at: string;
   created_at: string;
 }
+
+export interface IProductsData {
+  id: string;
+  name: string;
+  description: string;
+  tension: number;
+  brand: string;
+}
 export interface ISubmitRegisterProduct {
   name: string;
   description: string;
@@ -44,18 +51,22 @@ export interface IApiContext {
   // handleProductEdit: (data: IhandleProductEdit) => void;
   // handleProductRmv: () => void;
   // logout: () => void;
-  // setProductsData: React.Dispatch<React.SetStateAction<IProducts>>;
-  // setActualProduct: React.Dispatch<React.SetStateAction<ISubmitRegisterProduct>>;
+  setActualProduct: React.Dispatch<React.SetStateAction<IProductsData>>;
   // loading: boolean;
-  // productsList: IProducts[];
+  productsList: IProducts[];
 }
 
 export const ApiContext = createContext<IApiContext>({} as IApiContext);
 
 export const ApiProvider = ({ children }: IApiProviderProps) => {
+
   const [loading, setLoading] = useState(true);
-  const [ProductsList, setProductsList] = useState<IProducts[]>([] as IProducts[]);
+  const [productsList, setProductsList] = useState<IProducts[]>([] as IProducts[]);
   const [newProductsList, setNewProductsList] = useState<IProducts[]>([] as IProducts[]);
+  const [actualProduct, setActualProduct] = useState<IProductsData>(
+    {} as IProducts
+  );
+
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -80,7 +91,7 @@ export const ApiProvider = ({ children }: IApiProviderProps) => {
       .post("/products", data)
       .then((res) => {
         console.log(res.data)
-        setNewProductsList([...ProductsList, res.data]);
+        setNewProductsList([...productsList, res.data]);
         toastSuccesTechRegister();
       })
       .catch((res) => {
@@ -127,6 +138,8 @@ export const ApiProvider = ({ children }: IApiProviderProps) => {
     <ApiContext.Provider
       value={{
         onSubmitRegisterProductFunction,
+        productsList,
+        setActualProduct,
         // logout,
         // loading,
         // techList,
