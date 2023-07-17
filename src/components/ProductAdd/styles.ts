@@ -4,14 +4,15 @@ export const Section = styled.section`
     height: 100vh;
     width: 100%;
     display: flex;
-    color: #F8F9FA;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: fixed; 
-    width: 100%;
+    width: 30%;
     height: 100%;
-    background-color: rgba(0,0,0,0.8);
+    color: #F8F9FA;
+    background-color: #212529;
+    
+
 
    #divProductRegister {
     width: 396px;
