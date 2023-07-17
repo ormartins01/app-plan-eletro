@@ -7,58 +7,46 @@ export const Section = styled.section`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 30%;
+    width: 32%;
     height: 100%;
     color: #F8F9FA;
     background-color: #212529;
     
 
+    
+    h2 {
+        margin-top: 36px;
+
+    }
 
    #divProductRegister {
     width: 396px;
-    height: 450px;
+    height: 420px;
     background-color: #212529;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    align-content: center;
     align-items: center;
     border-radius: 8px;
-
-    #closeModal {
-        font-size: 16px;
-        font-weight: 400;
-        margin-top: -5px;
-        width: 93%;
-        background-color: transparent;
-        border: none;
-        color: inherit;
-        text-align: right;
-    }
-
-
+    
 
     form {
         width: 85%;
         height: 75%;
         display: flex;
         flex-direction: column;
-        justify-content: space-evenly;
-    }
-
-    label {
-        width: 90%;
-        text-align: left;
-        font-size: 10px;
-        color: #F8F9FA;
+        justify-content: space-around;
+        margin-top: 20px;
     }
 
     span{
         width: 90%;
         text-align: left;
-        margin-top: -30px;
         padding-bottom: 10px;
         font-size: 10px;
-        color: #868E96;
+        color: #E83F5B;
+        margin-top: -16px;
+        margin-left: 4px;
     }
     
     .errors{

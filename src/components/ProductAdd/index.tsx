@@ -31,7 +31,7 @@ export const ProductAdd = () => {
             <InputStyle placeholder="Insira uma descrição" id="description" {...register("description")} />
             <span>{errors.description?.message}</span>
 
-            <SelectStyle placeholder="Selecione uma voltagem" id="select" {...register("tension")}>
+            <SelectStyle placeholder="Selecione uma voltagem" className="select" {...register("tension")}>
             <option value="">Escolha uma voltagem</option>
               <option value="5">5 Volts</option>
               <option value="12">12 Volts</option>
@@ -39,7 +39,7 @@ export const ProductAdd = () => {
               <option value="220">220 Volts</option>
             </SelectStyle>
 
-            <SelectStyle placeholder="Selecione uma marca" id="select" {...register("brand")}>
+            <SelectStyle placeholder="Selecione uma marca" className="select" {...register("brand")}>
             <option value="">Escolha uma marca</option>
               <option value="Eletrolux">Eletrolux</option>
               <option value="Brastemp">Brastemp</option>
