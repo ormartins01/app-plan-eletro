@@ -75,6 +75,16 @@ export const Product = styled.div`
       margin-left: 15px;
     }
 
+    p {
+      margin-top: -18px;
+    }
+
+    #secondDiv {
+      display: flex;
+      flex-direction: column;
+      align-items: end;
+    }
+
     :hover {
       background-color: #343B41;
       border-radius: 8px;

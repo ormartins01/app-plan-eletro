@@ -35,7 +35,7 @@ export const ProductList = () => {
                 <h3>{elem.name}</h3>
                 <p>{elem.description}</p>
                 </div>
-                <div id="firstDiv">
+                <div id="secondDiv">
                 <span>{elem.brand}</span>
                 <span>{elem.tension}</span>
                 </div>
