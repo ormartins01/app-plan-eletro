@@ -7,7 +7,7 @@ export const ButtonStyle = styled.button`
     background-color: aqua;
     border: 1px solid aqua;
     border-radius: 4px;
-    color: #FFFFFF;
+    color: #212529;
     font-size: 13px;
     
 

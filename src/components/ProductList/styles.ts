@@ -50,7 +50,7 @@ export const List = styled.div`
 
 export const Product = styled.div`
     width: 95%;
-    height: 45px;
+    height: 55px;
     background-color: black;
     border: 1px solid  #808080;
     list-style: none;
@@ -77,6 +77,8 @@ export const Product = styled.div`
 
     :hover {
       background-color: #343B41;
+      border-radius: 8px;
+      border: 1px solid  #808080;
     }
 
 `;

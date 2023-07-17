@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 
 export const SelectStyle = styled.select`
-    width: 95%;
+    width: 98%;
     height: 39px;
     background-color: #343B41;
     border: 1px solid #F8F9FA;

@@ -18,7 +18,7 @@ export const ProductList = () => {
             <Product
               key={elem.id}
               id="listCard"
-              title="Clique para editar esta Tech"
+              title="Clique para editar este Produto"
               onClick={() => {
                 setActualProduct({
                   id: elem.id,
@@ -31,8 +31,14 @@ export const ProductList = () => {
               }}
             >
               <div id="divCard">
+                <div id="firstDiv">
                 <h3>{elem.name}</h3>
+                <p>{elem.description}</p>
+                </div>
+                <div id="firstDiv">
                 <span>{elem.brand}</span>
+                <span>{elem.tension}</span>
+                </div>
               </div>
             </Product>
           );
