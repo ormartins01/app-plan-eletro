@@ -17,4 +17,3 @@ export const formProductSchema = yup.object().shape({
         "LG"
     ])
 });
-

@@ -7,6 +7,7 @@ import { ButtonAddProduct } from "../Button";
 import { InputStyle } from "../Input/style";
 import { SelectStyle } from "../Select/style";
 import { formProductSchema } from "../../schemas/formSchema";
+import { ProductEditRmv } from "../ProductEditRmv";
 
 export const ProductAdd = () => {
   const {
@@ -17,7 +18,7 @@ export const ProductAdd = () => {
     resolver: yupResolver(formProductSchema),
   });
 
-  const { onSubmitRegisterProductFunction } =
+  const { onSubmitRegisterProductFunction, productEditRmvModal } =
     useContext(ApiContext);
 
   return (
@@ -31,7 +32,7 @@ export const ProductAdd = () => {
             <InputStyle placeholder="Insira uma descrição" id="description" {...register("description")} />
             <span>{errors.description?.message}</span>
 
-            <SelectStyle placeholder="Selecione uma voltagem" className="select" {...register("tension")}>
+            <SelectStyle placeholder="Selecione uma voltagem" id="select" {...register("tension")}>
             <option value="">Escolha uma voltagem</option>
               <option value="5">5 Volts</option>
               <option value="12">12 Volts</option>
@@ -39,7 +40,7 @@ export const ProductAdd = () => {
               <option value="220">220 Volts</option>
             </SelectStyle>
 
-            <SelectStyle placeholder="Selecione uma marca" className="select" {...register("brand")}>
+            <SelectStyle placeholder="Selecione uma marca" id="select" {...register("brand")}>
             <option value="">Escolha uma marca</option>
               <option value="Eletrolux">Eletrolux</option>
               <option value="Brastemp">Brastemp</option>
@@ -49,6 +50,8 @@ export const ProductAdd = () => {
             </SelectStyle>
             <ButtonAddProduct />
           </form>
+          {productEditRmvModal ? <ProductEditRmv /> : <></>}
+
         </div>
     </Section>
   );

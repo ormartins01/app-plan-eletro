@@ -2,12 +2,9 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import {
   toastFail,
-  toastFailTechRegister,
-  toastSuccesLogin,
-  toastSuccesRegister,
-  toastSuccesTechEdit,
-  toastSuccesTechRegister,
-  toastSuccesTechRmv,
+  toastSuccesProductEdit,
+  toastSuccesProductRegister,
+  toastSuccesProductRmv,
 } from "../components/Toast";
 import api from "../services/api";
 
@@ -25,12 +22,20 @@ export interface IProducts {
   created_at: string;
 }
 
+export interface IProductsUpdate {
+  name: string;
+  description: string;
+  tension: number;
+  brand: string;
+}
+
 export interface IProductsData {
   id: string;
   name: string;
   description: string;
   tension: number;
   brand: string;
+
 }
 export interface ISubmitRegisterProduct {
   name: string;
@@ -48,8 +53,10 @@ export interface IhandleProductEdit {
 
 export interface IApiContext {
   onSubmitRegisterProductFunction: (data: ISubmitRegisterProduct) => void;
-  // handleProductEdit: (data: IhandleProductEdit) => void;
-  // handleProductRmv: () => void;
+  setProductEditRmvModal: React.Dispatch<React.SetStateAction<boolean>>;
+  handleProductEdit: (data: IhandleProductEdit) => void;
+  productEditRmvModal: boolean;
+  handleProductRmv: () => void;
   // logout: () => void;
   setActualProduct: React.Dispatch<React.SetStateAction<IProductsData>>;
   // loading: boolean;
@@ -61,11 +68,13 @@ export const ApiContext = createContext<IApiContext>({} as IApiContext);
 export const ApiProvider = ({ children }: IApiProviderProps) => {
 
   const [loading, setLoading] = useState(true);
+  const [productEditRmvModal, setProductEditRmvModal] = useState(false);
   const [productsList, setProductsList] = useState<IProducts[]>([] as IProducts[]);
   const [newProductsList, setNewProductsList] = useState<IProducts[]>([] as IProducts[]);
   const [actualProduct, setActualProduct] = useState<IProductsData>(
     {} as IProducts
   );
+
 
 
   useEffect(() => {
@@ -84,55 +93,46 @@ export const ApiProvider = ({ children }: IApiProviderProps) => {
 
 
   const onSubmitRegisterProductFunction = async (data: ISubmitRegisterProduct) => {
-
-    console.log(data)
-
     await api
       .post("/products", data)
       .then((res) => {
-        console.log(res.data)
         setNewProductsList([...productsList, res.data]);
-        toastSuccesTechRegister();
+        toastSuccesProductRegister();
       })
       .catch((res) => {
         console.error(res);
-        toastFailTechRegister();
+        toastFail();
       });
   };
 
-  // const actTechList = async () => {
-  //   const { id } = userData;
-  //   await api.get(`/users/${id}`).then((res) => {
-  //     setNewTechList(res.data.techs);
-  //   });
-  // };
+  const loadProducts = async () => {
+    await api.get(`/products`).then((res) => {
+      setProductsList(res.data);
+    });
+  };
 
-  // const handleTechEdit = async (data: IhandleTechEdit) => {
-  //   const { id } = actualTech;
-  //   console.log(data);
-  //   await api.put(`/users/techs/${id}`, { status: data.status }).then(() => {
-  //     actTechList();
-  //     const newList = techList.filter((elem) => elem);
-  //     setNewTechList(newList);
-  //     setTechEditRmvModal(false);
-  //     toastSuccesTechEdit();
-  //   });
-  // };
+  const handleProductEdit = async (data: IhandleProductEdit) => {
+    const { id } = actualProduct;
+    console.log("Chegando")
+    await api.put(`/products/${id}`, data).then(() => {
+      loadProducts();
+      const newList = productsList.filter((elem) => elem);
+      setNewProductsList(newList);
+      setProductEditRmvModal(false);
+      toastSuccesProductEdit();
+    });
+  };
 
-  // const handleTechRmv = async () => {
-  //   const { id } = actualTech;
-  //   await api.delete(`/users/techs/${id}`).then(() => {
-  //     const newList = techList.filter((elem) => elem.id !== id);
-  //     setNewTechList(newList);
-  //     toastSuccesTechRmv();
-  //     setTechEditRmvModal(false);
-  //   });
-  // };
+  const handleProductRmv = async () => {
+    const { id } = actualProduct;
+    await api.delete(`/products/${id}`).then(() => {
+      const newList = productsList.filter((elem) => elem.id !== id);
+      setNewProductsList(newList);
+      toastSuccesProductRmv();
+      setProductEditRmvModal(false);
+    });
+  };
 
-  // function logout() {
-  //   localStorage.clear();
-  //   navigate("../", { replace: true });
-  // }
 
   return (
     <ApiContext.Provider
@@ -140,22 +140,10 @@ export const ApiProvider = ({ children }: IApiProviderProps) => {
         onSubmitRegisterProductFunction,
         productsList,
         setActualProduct,
-        // logout,
-        // loading,
-        // techList,
-        // userData,
-        // actualTech,
-        // setUserData,
-        // techAddModal,
-        // handleTechRmv,
-        // setActualTech,
-        // handleTechEdit,
-        // setTechAddModal,
-        // techEditRmvModal,
-        // setTechEditRmvModal,
-        // onSubmitLoginFunction,
-        // onSubmitRegisterFunction,
-        // onSubmitRegisterTechFunction,
+        setProductEditRmvModal,
+        handleProductEdit,
+        productEditRmvModal,
+        handleProductRmv
       }}
     >
       {children}
