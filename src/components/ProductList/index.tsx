@@ -1,9 +1,10 @@
 import { ApiContext } from "../../context/ApiContext";
 import { useContext } from "react";
 import { List, Product } from "./styles";
+import { ProductEditRmv } from "../ProductEditRmv";
 
 export const ProductList = () => {
-  const { productsList, setActualProduct } =
+  const { productsList, setActualProduct, setProductEditRmvModal, productEditRmvModal } =
     useContext(ApiContext);
 
   return (
@@ -27,7 +28,7 @@ export const ProductList = () => {
                   tension: elem.tension,
                   brand: elem.brand
                 });
-                // setTechEditRmvModal(true);
+                setProductEditRmvModal(true);
               }}
             >
               <div id="divCard">
@@ -40,6 +41,7 @@ export const ProductList = () => {
                 <span>{elem.tension}</span>
                 </div>
               </div>
+
             </Product>
           );
         })
