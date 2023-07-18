@@ -45,7 +45,6 @@ export const List = styled.div`
   background: var(--color-primary);
 }
 
-  
 `;
 
 export const Product = styled.div`
